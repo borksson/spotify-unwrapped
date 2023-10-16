@@ -15,9 +15,9 @@ export default function TopTracksPage() {
         ])
     }, [])
     return (
-        <TableContainer border={"1px solid LightGray"} borderRadius={"md"} boxShadow={"md"} padding={"5px"} margin={"5px"}>
-            <Table variant="simple">
-                <TableCaption>Top Tracks</TableCaption>
+        <TableContainer border={"1px solid LightGray"} borderRadius={"md"} padding={"5px"} margin={"5px"}>
+            <Table variant="simple" colorScheme="green">
+                <TableCaption placement="top">Top Tracks</TableCaption>
                 <Thead>
                     <Tr>
                         <Th>Rank</Th>
