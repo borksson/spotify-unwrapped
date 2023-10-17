@@ -1,5 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react'
 import TopTracksPage from './pages/TopTracksPage'
+import TopArtistsPage from './pages/TopArtistsPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           {/* TODO: Replace with homepage */}
           <Route path="/" element={<p>Welcome to Spotify Unwrapped!</p>}/>
           <Route path="/top-tracks" element={<TopTracksPage/>}/>
+          <Route path="/top-artists" element={<TopArtistsPage/>}/>
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
