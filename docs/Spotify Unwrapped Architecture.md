@@ -1,3 +1,9 @@
+### Project Description
+Spotify Unwrapped is a persistent version of Spotify's yearly wrapped review of a user's listening stats. Users will be able to login to our service and view their top tracks, top artists, and their listening profile. Users will see interesting and compelling statistics about their listening history, and share their profile with other people. 
+
+### Document Description
+This document describes the architecture of the Spotify Unwrapped project. It describes the project's model, framework, components, and view. It also describes the project's API and the endpoints which will be used by the frontend will call on our backend which interacts with the Spotify API. The document also describes the project's pages. The document also describes the project's framework and project layout.
+
 ### Pages
 **Prototype**
 - Top Artists
@@ -218,6 +224,9 @@
 ```
 ### Control
 - Cache/Context: singleton data cache which stores the user data, access token, ect.
+
+### Spotify Request Example
+![](getTopArtists.png)
 
 ### Components/Pages
 **Prototype**
