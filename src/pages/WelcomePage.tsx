@@ -12,6 +12,9 @@ export default function WelcomePage() {
                 <Link to="/top-tracks">
                     <Button colorScheme="green">Top Tracks</Button>
                 </Link>
+                <Link to="/user-profile"> {/* Add this Link */}
+                    <Button colorScheme="green">User Profile</Button>
+                </Link>
             </VStack>
         </Box>
     );

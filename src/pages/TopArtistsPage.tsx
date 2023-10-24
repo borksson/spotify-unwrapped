@@ -24,7 +24,7 @@ export default function TopTracksPage() {
                         <Th>Artist</Th>
                     </Tr>
                 </Thead>
-                {artists.map((artist, index) => ArtistTableItem(artist, index + 1))}
+                {artists.map((artist, index) => <ArtistTableItem artist={artist} rank={index+1} />)}
             </Table>
 
         </TableContainer>
