@@ -5,7 +5,7 @@ import TrackTableItem from "../components/TrackTableItem";
 
 export default function TopTracksPage() {
     const [tracks, setTracks] = useState<Track[]>([])
-    
+
     useEffect(() => {
         //TODO: Replace with API call
         setTracks([
@@ -16,8 +16,8 @@ export default function TopTracksPage() {
     }, [])
     return (
         <TableContainer border={"1px solid LightGray"} borderRadius={"md"} padding={"5px"} margin={"5px"}>
-            <Table variant="simple" colorScheme="green">
-                <TableCaption placement="top">Top Tracks</TableCaption>
+            <Table variant="simple" colorScheme="green" size="md" mt={4}>
+                <TableCaption placement="top" fontWeight="bold" fontSize="xl">Top Tracks</TableCaption>
                 <Thead>
                     <Tr>
                         <Th>Rank</Th>
@@ -26,8 +26,9 @@ export default function TopTracksPage() {
                         <Th>Album</Th>
                     </Tr>
                 </Thead>
-                {tracks.map((track, index) => TrackTableItem(track, index+1))}
+                {tracks.map((track, index) => TrackTableItem(track, index + 1))}
             </Table>
+
         </TableContainer>
     )
 }
