@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { Track, getDummyTrack } from "../model/Track";
+import { Track } from "../model/Track";
 import { Table, TableCaption, TableContainer, Th, Thead, Tr } from "@chakra-ui/react";
 import TrackTableItem from "../components/TrackTableItem";
+import { TimeFrame, getTopTracks } from "../api/SpotifyFacade";
 
 export default function TopTracksPage() {
     const [tracks, setTracks] = useState<Track[]>([])
 
     useEffect(() => {
         //TODO: Replace with API call
-        setTracks([
-            getDummyTrack(),
-            getDummyTrack(),
-            getDummyTrack(),
-        ])
+        getTopTracks(sessionStorage.getItem("token")!, 5, TimeFrame.long_term).then((tracks) => {
+            setTracks(tracks);
+        })
     }, [])
+
     return (
         <TableContainer border={"1px solid LightGray"} borderRadius={"md"} padding={"5px"} margin={"5px"}>
             <Table variant="simple" colorScheme="green" size="md" mt={4}>
