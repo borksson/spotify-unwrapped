@@ -9,8 +9,6 @@ export default function TrackTableItem(track: Track, rank: number) {
                 <ChakraImage boxSize="50px" src={track.album.images[0]?.url} alt={track.name} mr={2} />
                 {track.name}
             </Th>
-            <Th>{rank}</Th>
-            <Th>{track.name}</Th>
             <Th>{track.artists.map((artist) => artist.name).join(", ")}</Th>
             <Th>{track.album.name}</Th>
         </Tr>
