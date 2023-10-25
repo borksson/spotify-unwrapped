@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
+import { Box, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Tooltip, Icon, Text } from '@chakra-ui/react';
+import { InfoIcon } from '@chakra-ui/icons';
 import { LoginUserProfile } from '../model/LoginUserProfile';
 import { Profile } from '../model/LoginUserProfile';
-import {UserProfile, getDummyUserProfile} from '../model/UserProfile'
+import { UserProfile, getDummyUserProfile } from '../model/UserProfile';
 
 export default function UserProfilePage() {
     const [userProfile, setUserProfile] = useState<LoginUserProfile | null>(null);
@@ -10,88 +11,148 @@ export default function UserProfilePage() {
     const [userProfileStats, setUserProfileStats] = useState<UserProfile | null>(null);
 
     useEffect(() => {
-        // TODO: Fetch user profile and listening profile using API calls
-        // For now, we'll use dummy data
-
-        setUserProfileStats(
-            getDummyUserProfile()
-        )
-        // setUserProfile(dummyUserProfileData);
-        // setListeningProfile(dummyListeningProfileData);
+        setUserProfileStats(getDummyUserProfile());
     }, []);
 
     return (
-        <Box p={4}>
-            <Box mb={6}>
-                <Image borderRadius="full" boxSize="150px" src={userProfile?.images[0]?.url} alt={userProfile?.display_name} />
-                <Box mt={2}>
-                    <Box fontWeight="bold" fontSize="xl">{userProfile?.display_name}</Box>
-                    <Box>{userProfile?.email}</Box>
-                    <Box>{userProfile?.country}</Box>
-                    <Box><a href={userProfile?.external_urls.spotify} target="_blank" rel="noopener noreferrer">Spotify Profile</a></Box>
+        <Box bg="black" minHeight="100vh" color="gray.300" p={4}>
+            <Box mb={6} textAlign="center">
+                <Image borderRadius="full" boxSize="200px" src={userProfile?.images[0]?.url} alt={userProfile?.display_name} />
+                <Box mt={4}>
+                    <Text fontWeight="bold" fontSize="3xl" color="gray.50">{userProfile?.display_name}</Text>
+                    <Text fontSize="xl" color="gray.400">{userProfile?.email}</Text>
+                    <Text fontSize="lg" color="gray.500">{userProfile?.country}</Text>
+                    <Box mt={2}>
+                        <a href={userProfile?.external_urls.spotify} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: '#1DB954' }}>Spotify Profile</a>
+                    </Box>
                 </Box>
             </Box>
 
-            <TableContainer border={"1px solid LightGray"} borderRadius={"md"} padding={"5px"} margin={"5px"}>
-                <Table variant="simple">
+            <TableContainer border={"1px solid #1DB954"} borderRadius={"md"} padding={"5px"} margin={"5px"} bg="blackAlpha.800">
+                <Table variant="simple" size="lg">
                     <Thead>
                         <Tr>
-                            <Th>Attribute</Th>
-                            <Th>Value</Th>
+                            <Th color="gray.50">Attribute</Th>
+                            <Th color="gray.50">Value</Th>
                         </Tr>
                     </Thead>
                     <Tbody>
                         <Tr>
-                            <Td>Acousticness</Td>
-                            <Td>{userProfileStats?.acousticness}</Td>
+                            <Td>
+                                Acousticness 
+                                <Tooltip label="A measure of how acoustic the tracks are." color="black" bgColor="gray.300">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.acousticness}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Danceability</Td>
-                            <Td>{userProfileStats?.danceability}</Td>
+                            <Td>
+                                Danceability
+                                <Tooltip label="A measure of how danceable the tracks are.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.danceability}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Duration (ms)</Td>
-                            <Td>{userProfileStats?.duration_ms}</Td>
+                            <Td>
+                                Duration (ms)
+                                <Tooltip label="The average duration of tracks in milliseconds.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.duration_ms}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Energy</Td>
-                            <Td>{userProfileStats?.energy}</Td>
+                            <Td>
+                                Energy
+                                <Tooltip label="A measure of the intensity and activity of tracks.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.energy}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Instrumentalness</Td>
-                            <Td>{userProfileStats?.instrumentalness}</Td>
+                            <Td>
+                                Instrumentalness
+                                <Tooltip label="A measure of how instrumental the tracks are.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.instrumentalness}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Key</Td>
-                            <Td>{userProfileStats?.key}</Td>
+                            <Td>
+                                Key
+                                <Tooltip label="The key the track is in.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.key}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Liveness</Td>
-                            <Td>{userProfileStats?.liveness}</Td>
+                            <Td>
+                                Liveness
+                                <Tooltip label="A measure of the presence of a live audience in the recording.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.liveness}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Loudness</Td>
-                            <Td>{userProfileStats?.loudness}</Td>
+                            <Td>
+                                Loudness
+                                <Tooltip label="Overall loudness of the track in decibels.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.loudness}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Mode</Td>
-                            <Td>{userProfileStats?.mode}</Td>
+                            <Td>
+                                Mode
+                                <Tooltip label="Modality of the track.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.mode}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Speechiness</Td>
-                            <Td>{userProfileStats?.speechiness}</Td>
+                            <Td>
+                                Speechiness
+                                <Tooltip label="A measure of the presence of spoken words in the track.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.speechiness}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Tempo</Td>
-                            <Td>{userProfileStats?.tempo}</Td>
+                            <Td>
+                                Tempo
+                                <Tooltip label="The overall estimated tempo of the track in beats per minute.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.tempo}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Time Signature</Td>
-                            <Td>{userProfileStats?.time_signature}</Td>
+                            <Td>
+                                Time Signature
+                                <Tooltip label="An estimated overall time signature of the track.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.time_signature}</Td>
                         </Tr>
                         <Tr>
-                            <Td>Valence</Td>
-                            <Td>{userProfileStats?.valence}</Td>
+                            <Td>
+                                Valence
+                                <Tooltip label="A measure of the musical positiveness of the track.">
+                                    <Icon as={InfoIcon} ml={2} w={4} h={4} color="gray.500" />
+                                </Tooltip>
+                            </Td>
+                            <Td color="gray.200">{userProfileStats?.valence}</Td>
                         </Tr>
                     </Tbody>
                 </Table>
@@ -99,3 +160,4 @@ export default function UserProfilePage() {
         </Box>
     );
 }
+
