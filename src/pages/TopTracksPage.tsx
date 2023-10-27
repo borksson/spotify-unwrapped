@@ -8,7 +8,6 @@ export default function TopTracksPage() {
     const [tracks, setTracks] = useState<Track[]>([]);
 
     useEffect(() => {
-        //TODO: Replace with API call
         getTopTracks(sessionStorage.getItem("token")!, 5, TimeFrame.long_term).then((tracks) => {
             setTracks(tracks);
         });
