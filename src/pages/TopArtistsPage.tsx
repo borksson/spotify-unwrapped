@@ -10,21 +10,25 @@ export default function TopArtistsPage() {
     useEffect(() => {
         getTopArtists(sessionStorage.getItem("token")!, 5, TimeFrame.long_term).then((artists) => {
             setArtists(artists);
-        })
-    }, [])
-    return (
-        <TableContainer border={"1px solid LightGray"} borderRadius={"md"} padding={"5px"} margin={"5px"}>
-            <Table variant="simple" colorScheme="green" size="md" mt={4}>
-                <TableCaption placement="top" fontWeight="bold" fontSize="xl">Top Artists</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>Rank</Th>
-                        <Th>Artist</Th>
-                    </Tr>
-                </Thead>
-                {artists.map((artist, index) => ArtistTableItem(artist, index + 1))}
-            </Table>
+        });
+    }, []);
 
-        </TableContainer>
-    )
+    return (
+        <Box bg="black" minHeight="100vh" color="gray.300" p={4}>
+            <TableContainer border={"1px solid LightGray"} borderRadius={"md"} padding={"5px"} margin={"5px"} bg="blackAlpha.800">
+                <Table variant="simple" size="lg">
+                    <TableCaption placement="top" fontWeight="bold" fontSize="2xl" color="gray.50">Top Artists</TableCaption>
+                    <Thead>
+                        <Tr>
+                            <Th color="gray.50">Rank</Th>
+                            <Th color="gray.50">Artist</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        {artists.map((artist, index) => <ArtistTableItem artist={artist} rank={index + 1} key={artist.id} />)}
+                    </Tbody>
+                </Table>
+            </TableContainer>
+        </Box>
+    );
 }
