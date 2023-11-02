@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Box, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Tooltip, Icon, Text } from '@chakra-ui/react';
 import { InfoIcon } from '@chakra-ui/icons';
 import { LoginUserProfile } from '../model/LoginUserProfile';
-import { Profile } from '../model/LoginUserProfile';
 import { UserProfile, getDummyUserProfile } from '../model/UserProfile';
+import { getUserProfile } from '../api/SpotifyFacade';
 
 export default function UserProfilePage() {
     const [userProfile, setUserProfile] = useState<LoginUserProfile | null>(null);
-    const [listeningProfile, setListeningProfile] = useState<Profile | null>(null);
     const [userProfileStats, setUserProfileStats] = useState<UserProfile | null>(null);
 
     useEffect(() => {
-        setUserProfileStats(getDummyUserProfile());
+        getUserProfile(sessionStorage.getItem("token")!).then((userProfileStats) => {
+            setUserProfileStats(userProfileStats)
+        })
     }, []);
 
     return (
