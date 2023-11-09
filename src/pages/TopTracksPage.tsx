@@ -21,6 +21,7 @@ export default function TopTracksPage() {
                     <Thead>
                         <Tr>
                             <Th color="gray.50">Rank</Th>
+                            <Th color="gray.50"></Th>
                             <Th color="gray.50">Track</Th>
                             <Th color="gray.50">Artist</Th>
                             <Th color="gray.50">Album</Th>

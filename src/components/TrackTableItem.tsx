@@ -12,8 +12,8 @@ export default function TrackTableItem({ track, rank }: TrackTableItemProps) {
             <Th color="gray.150"> {rank}</Th>
             <Th color="gray.150">
                 <ChakraImage boxSize="50px" src={track.album.images[0]?.url} alt={track.name} mr={2} />
-                {track.name}
             </Th>
+            <Th color="gray.150">{track.name}</Th>
             <Th color="gray.150">{track.artists.map((artist) => artist.name).join(", ")}</Th>
             <Th color="gray.150">{track.album.name}</Th>
         </Tr>

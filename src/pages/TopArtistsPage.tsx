@@ -21,6 +21,7 @@ export default function TopArtistsPage() {
                     <Thead>
                         <Tr>
                             <Th color="gray.50">Rank</Th>
+                            <Th color="gray.50"></Th>
                             <Th color="gray.50">Artist</Th>
                         </Tr>
                     </Thead>
