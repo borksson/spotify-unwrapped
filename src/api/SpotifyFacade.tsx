@@ -1,6 +1,7 @@
 import { Track } from "../model/Track";
 import { Artist } from "../model/Artist";
 import { UserProfile } from "../model/UserProfile";
+import { LoginUserProfile } from "../model/LoginUserProfile";
 
 export enum TimeFrame {
     short_term = "short_term",
@@ -26,6 +27,14 @@ export const getTopArtists = async (accessToken: string, limit: number, timeFram
     });
     const { items } = await result.json();
     return items as Artist[];
+}
+
+export const getLoginUserProfile = async (accessToken: string) : Promise<LoginUserProfile> => {
+    const result = await fetch(`https://api.spotify.com/v1/me`, {
+        method: "GET", headers: {Authorization: `Bearer ${accessToken}` }
+    });
+    const response = await result.json();
+    return response as LoginUserProfile;
 }
 
 export const getUserProfile = async (accessToken: string): Promise<UserProfile> => {
