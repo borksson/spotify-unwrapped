@@ -22,9 +22,9 @@ export default function UserProfilePage() {
 
     return (
         <Box bg="black" minHeight="100vh" color="gray.300" p={4}>
-            <Box mb={6} display="flex" justifyContent="space-around">
-                <Image borderRadius="full" boxSize="200px" src={loginUserProfile?.images[0]?.url} alt={loginUserProfile?.display_name} />
-                <Box mt={4}>
+            <Box mb={6} display="flex" justifyContent="left">
+                <Image borderRadius="full" boxSize="150px" src={loginUserProfile?.images[0]?.url} alt={loginUserProfile?.display_name} />
+                <Box mt={4} ml={10} >
                     <Text fontWeight="bold" fontSize="3xl" color="gray.50">{loginUserProfile?.display_name}</Text>
                     <Text fontSize="xl" color="gray.400">{loginUserProfile?.email}</Text>
                     <Text fontSize="lg" color="gray.500">{loginUserProfile?.country}</Text>
