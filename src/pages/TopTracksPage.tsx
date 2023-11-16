@@ -3,18 +3,25 @@ import { Track } from "../model/Track";
 import { Table, TableCaption, TableContainer, Th, Thead, Tr, Tbody, Box } from "@chakra-ui/react";
 import TrackTableItem from "../components/TrackTableItem";
 import { TimeFrame, getTopTracks } from "../api/SpotifyFacade";
+import TimeFrameDropdown from "../components/TimeFrameDropdown";
 
 export default function TopTracksPage() {
     const [tracks, setTracks] = useState<Track[]>([]);
+    const [timeFrame, setTimeFrame] = useState<TimeFrame>(TimeFrame.long_term); // Default time frame
+
+    const handleTimeFrameChange = (event) => {
+        setTimeFrame(event.target.value);
+    };
 
     useEffect(() => {
-        getTopTracks(sessionStorage.getItem("token")!, 5, TimeFrame.long_term).then((tracks) => {
+        getTopTracks(sessionStorage.getItem("token")!, 5, timeFrame).then((tracks) => {
             setTracks(tracks);
         });
-    }, []);
+    }, [timeFrame]);
 
     return (
         <Box bg="black" minHeight="100vh" color="gray.300" p={4}>
+            <TimeFrameDropdown value={timeFrame} onChange={handleTimeFrameChange} />
             <TableContainer border={"1px solid LightGray"} borderRadius={"md"} padding={"5px"} margin={"5px"} bg="blackAlpha.800">
                 <Table variant="simple" size="lg">
                     <TableCaption placement="top" fontWeight="bold" fontSize="2xl" color="gray.50">Top Tracks</TableCaption>
