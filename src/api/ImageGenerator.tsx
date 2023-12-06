@@ -24,31 +24,42 @@ const wrapText = (text: string, lineLength: number) => {
     return newLines.join('\n');
 }
 
-const graphProfile = (userProfile: any) => {
+export const graphUserProfile = (userProfile: any) => {
+    const canvas = document.getElementById('canvas') as HTMLCanvasElement;
+    paper.setup(canvas);
+
+    graphProfile(userProfile, 30, 220, 2, 0.8, 'white');
+}
+
+
+const graphProfile = (userProfile: any, yCenter: number, xCenter: number, scale: number, bgOpacity: number, bg: string) => {
     // Make seven lines with the following labels: acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence
-    const rect = new paper.Path.Rectangle(new paper.Point(140, 380), new paper.Point(360, 470));
-    rect.fillColor = new paper.Color('white');
-    rect.opacity = 0.4;
+    // xCenter = 250
+    const rectangle = new paper.Path.Rectangle(new paper.Point(xCenter-(110*scale), yCenter-(10*scale)), new paper.Point(xCenter+(110*scale), yCenter+(80*scale)));
+    const radius = new paper.Size(10*scale, 10*scale);
+    const rect = new paper.Path.Rectangle(rectangle.bounds, radius);
+    rect.fillColor = new paper.Color(bg);
+    rect.opacity = bgOpacity;
     
-    const x_points = [160, 190, 220, 250, 280, 310, 340];
+    const x_points = [xCenter-(90*scale), xCenter-(60*scale), xCenter-(30*scale), xCenter, xCenter+(30*scale), xCenter+(60*scale), xCenter+(90*scale)];
 
     const values = [userProfile.acousticness, userProfile.danceability, userProfile.energy, userProfile.instrumentalness, userProfile.liveness, userProfile.speechiness, userProfile.valence];
     const value_titles = ['Acousticness', 'Danceability', 'Energy', 'Instrumentalness', 'Liveness', 'Speechiness', 'Valence'];
 
     x_points.forEach((x, index) => {
-        const line = new paper.Path.Line(new paper.Point(x, 390), new paper.Point(x, 460));
+        const line = new paper.Path.Line(new paper.Point(x, yCenter), new paper.Point(x, yCenter+(70*scale)));
         line.strokeColor = new paper.Color('grey');
         line.strokeWidth = 2;
 
-        const title = new paper.PointText(new paper.Point(x+10, 425));
+        const title = new paper.PointText(new paper.Point(x+(10*scale), yCenter+(35*scale)));
         title.rotation = 270;
         title.justification = 'center';
-        title.fontSize = 8;
+        title.fontSize = (8*scale);
         title.fontWeight = 'bold';
         title.fillColor = new paper.Color('grey');
         title.content = value_titles[index];
 
-        const point = new paper.Path.Circle(new paper.Point(x, 390 + (70-(values[index] * 70))), 3);
+        const point = new paper.Path.Circle(new paper.Point(x, yCenter + ((70*scale)-(values[index] * (70*scale)))), (3*scale));
         point.fillColor = new paper.Color('black');
     });
 
@@ -136,5 +147,5 @@ export const GenerateImage = async (accessToken: string) => {
     userProfileTitle.fillColor = new paper.Color('grey');
     userProfileTitle.content = 'User Profile:';
 
-    graphProfile(userProfile);
+    graphProfile(userProfile, 390, 250, 1, 0.4, 'white');
 }
