@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Tooltip, Icon, Text } from '@chakra-ui/react';
+import { Box, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Tooltip, Icon, Text, Button } from '@chakra-ui/react';
 import { InfoIcon } from '@chakra-ui/icons';
 import { LoginUserProfile } from '../model/LoginUserProfile';
 import { UserProfile, getDummyUserProfile } from '../model/UserProfile';
@@ -33,6 +33,8 @@ export default function UserProfilePage() {
                     </Box>
                 </Box>
             </Box>
+
+            <Button colorScheme='green' onClick={() => window.location.href = '/gen-image'}>Share Profile</Button>
 
             <TableContainer border={"1px solid #1DB954"} borderRadius={"md"} padding={"5px"} margin={"5px"} bg="blackAlpha.800">
                 <Table variant="simple" size="lg">

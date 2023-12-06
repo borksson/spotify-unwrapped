@@ -9,7 +9,7 @@ export default function TopArtistsPage() {
     const [artists, setArtists] = useState<Artist[]>([]);
     const [timeFrame, setTimeFrame] = useState<TimeFrame>(TimeFrame.long_term); // Default time frame
 
-    const handleTimeFrameChange = (event) => {
+    const handleTimeFrameChange = (event: any) => {
         setTimeFrame(event.target.value);
     };
 

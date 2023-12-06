@@ -5,7 +5,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  Text,
   IconButton,
   Button,
   Menu,
@@ -14,7 +13,6 @@ import {
   MenuItem,
   MenuDivider,
   useDisclosure,
-  useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
@@ -32,7 +30,8 @@ const NavLink = ({ children, to }: NavLinkProps) => (
     px={2}
     py={1}
     rounded={'md'}
-    _hover={{ textDecoration: 'none', bg: useColorModeValue('gray.200', 'gray.700') }}
+    color={"white"}
+    _hover={{ textDecoration: 'none', bg: 'gray.700' }}
   >
     {children}
   </Box>
@@ -50,7 +49,7 @@ export default function NavBar() {
 
   return (
     <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+      <Box bg={'gray.900'} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
             size={'md'}
@@ -60,7 +59,7 @@ export default function NavBar() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box>Spotify Unwrapped</Box>
+            <Box fontWeight={'bold'} color={"white"}>Spotify Unwrapped</Box>
             <HStack
               as={'nav'}
               spacing={4}
