@@ -101,17 +101,25 @@ export const GenerateImage = async (accessToken: string) => {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement;
     paper.setup(canvas);
 
-    const template = new paper.Raster("/template.png");
+    const templates = ["/templates/template.png"]//, "/templates/template_1.png", "/templates/template_2.png"]
+
+    const template = new paper.Raster(templates[Math.floor(Math.random() * templates.length)]);
     template.crossOrigin = 'anonymous';
 
-    template.position = paper.view.center;
-    template.scale(0.25);
+    template.onLoad = () => {
+        template.position = paper.view.center;
+        const optimalSize = [270, 480]
+        const xScale = optimalSize[0] / template.bounds.width;
+        const yScale = optimalSize[1] / template.bounds.height;
+        console.log(xScale, yScale, template.bounds.width, template.bounds.height)
+        template.scale(xScale, yScale);
+    }
     const artist = new paper.Raster(topTrackAlbumArt);
     artist.crossOrigin = 'anonymous';
     artist.position = new paper.Point(250, 130);
     artist.scale(0.25);
 
-    const tracksTitle = new paper.PointText(new paper.Point(130, 255));
+    const tracksTitle = new paper.PointText(new paper.Point(130, 260));
     tracksTitle.justification = 'left';
     tracksTitle.fontSize = 10;
     tracksTitle.fontWeight = 'bold';
@@ -119,21 +127,21 @@ export const GenerateImage = async (accessToken: string) => {
     tracksTitle.content = 'Top Tracks:';
 
 
-    const tracksText = new paper.PointText(new paper.Point(130, 270));
+    const tracksText = new paper.PointText(new paper.Point(130, 275));
     tracksText.justification = 'left';
     tracksText.fontSize = 12;
     tracksText.fontWeight = 'bold';
     tracksText.fillColor = new paper.Color('black');
     tracksText.content = tracksString;
 
-    const artistsTitle = new paper.PointText(new paper.Point(250, 255));
+    const artistsTitle = new paper.PointText(new paper.Point(250, 260));
     artistsTitle.justification = 'left';
     artistsTitle.fontSize = 10;
     artistsTitle.fontWeight = 'bold';
     artistsTitle.fillColor = new paper.Color('grey');
     artistsTitle.content = 'Top Artists:';
 
-    const artistsText = new paper.PointText(new paper.Point(250, 270));
+    const artistsText = new paper.PointText(new paper.Point(250, 275));
     artistsText.justification = 'left';
     artistsText.fontSize = 12;
     artistsText.fontWeight = 'bold';
