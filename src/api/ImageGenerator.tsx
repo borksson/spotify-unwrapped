@@ -129,7 +129,7 @@ export const GenerateImage = async (accessToken: string) => {
 
     const tracksText = new paper.PointText(new paper.Point(130, 275));
     tracksText.justification = 'left';
-    tracksText.fontSize = 12;
+    tracksText.fontSize = 10;
     tracksText.fontWeight = 'bold';
     tracksText.fillColor = new paper.Color('black');
     tracksText.content = tracksString;
@@ -143,7 +143,7 @@ export const GenerateImage = async (accessToken: string) => {
 
     const artistsText = new paper.PointText(new paper.Point(250, 275));
     artistsText.justification = 'left';
-    artistsText.fontSize = 12;
+    artistsText.fontSize = 10;
     artistsText.fontWeight = 'bold';
     artistsText.fillColor = new paper.Color('black');
     artistsText.content = artistsString;
