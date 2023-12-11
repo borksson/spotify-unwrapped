@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Tooltip, Icon, Text } from '@chakra-ui/react';
+import { Box, Image, Table, TableContainer, Tbody, Td, Th, Thead, Tr, Tooltip, Icon, Text, Button, Center, HStack } from '@chakra-ui/react';
 import { InfoIcon } from '@chakra-ui/icons';
 import { LoginUserProfile } from '../model/LoginUserProfile';
 import { UserProfile, getDummyUserProfile } from '../model/UserProfile';
 import { getUserProfile } from '../api/SpotifyFacade';
 import { getLoginUserProfile } from '../api/SpotifyFacade';
+import { graphUserProfile } from '../api/ImageGenerator';
 
 export default function UserProfilePage() {
     const [loginUserProfile, setLoginUserProfile] = useState<LoginUserProfile | null>(null);
@@ -17,22 +18,32 @@ export default function UserProfilePage() {
 
         getUserProfile(sessionStorage.getItem("token")!).then((userProfileStats) => {
             setUserProfileStats(userProfileStats)
+            graphUserProfile(userProfileStats)
         })
     }, []);
 
     return (
         <Box bg="black" minHeight="100vh" color="gray.300" p={4}>
-            <Box mb={6} display="flex" justifyContent="left">
-                <Image borderRadius="full" boxSize="150px" src={loginUserProfile?.images[0]?.url} alt={loginUserProfile?.display_name} />
-                <Box mt={4} ml={10} >
-                    <Text fontWeight="bold" fontSize="3xl" color="gray.50">{loginUserProfile?.display_name}</Text>
-                    <Text fontSize="xl" color="gray.400">{loginUserProfile?.email}</Text>
-                    <Text fontSize="lg" color="gray.500">{loginUserProfile?.country}</Text>
-                    <Box mt={2}>
-                        <a href={loginUserProfile?.external_urls.spotify} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: '#1DB954' }}>Spotify Profile</a>
+            <HStack spacing={20}>
+                <Box mb={6} display="flex" justifyContent="left">
+                    <Image borderRadius="full" boxSize="150px" src={loginUserProfile?.images[0]?.url} alt={loginUserProfile?.display_name} />
+                    <Box mt={4} ml={10} >
+                        <HStack spacing={4}>
+                            <Text fontWeight="bold" fontSize="3xl" color="gray.50">{loginUserProfile?.display_name}</Text>
+                            <Button colorScheme='green' onClick={() => window.location.href = '/gen-image'}>Share Profile</Button>
+                        </HStack>
+                        <Text fontSize="xl" color="gray.400">{loginUserProfile?.email}</Text>
+                        <Text fontSize="lg" color="gray.500">{loginUserProfile?.country}</Text>
+                        <Box mt={2}>
+                            <a href={loginUserProfile?.external_urls.spotify} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline', color: '#1DB954' }}>Spotify Profile</a>
+                        </Box>
                     </Box>
                 </Box>
-            </Box>
+
+                <Center>
+                    <canvas id="canvas" height="200" width="450" />
+                </Center>
+            </HStack>
 
             <TableContainer border={"1px solid #1DB954"} borderRadius={"md"} padding={"5px"} margin={"5px"} bg="blackAlpha.800">
                 <Table variant="simple" size="lg">

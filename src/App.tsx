@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import UserProfilePage from './pages/UserProfilePage';
 import NavBar from './components/NavBar';
+import ImagePage from './pages/ImagePage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/top-tracks" element={<TopTracksPage />} />
           <Route path="/top-artists" element={<TopArtistsPage />} />
           <Route path="/user-profile" element={<UserProfilePage />} />
+          <Route path="/gen-image" element={<ImagePage />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
